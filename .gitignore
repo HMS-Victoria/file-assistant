@@ -1,0 +1,23 @@
+# 虚拟环境
+.venv/
+venv/
+
+# 密钥：只提交 .env.example，绝不提交 .env
+# 注意：这里刻意不写 .env.* 通配，避免把 .env.example 一起忽略掉
+.env
+
+# 应用内部备份目录（运行时生成，含用户文件副本）
+.file_assistant_backups/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# 打包产物（当前尚无安装包，预留）
+build/
+dist/
+*.spec
