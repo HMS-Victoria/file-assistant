@@ -1,0 +1,29 @@
+{
+  "release_url": "https://github.com/HMS-Victoria/file-assistant/releases/tag/v0.1.0-rc1",
+  "source_commit": "abff6dac6fd1129fb1721f09ca64a273b6981d89",
+  "anonymous_download": true,
+  "assets": [
+    {
+      "name": "FileAssistant-0.1.0-rc1-source.zip",
+      "url": "https://github.com/HMS-Victoria/file-assistant/releases/download/v0.1.0-rc1/FileAssistant-0.1.0-rc1-source.zip",
+      "size": 103291,
+      "sha256": "72e40c63cbbd2fec929428c00da50628321ccf61a2c5d4435d989574d033ae1a",
+      "matches_local": true
+    },
+    {
+      "name": "FileAssistant-0.1.0-rc1-windows-x64.zip",
+      "url": "https://github.com/HMS-Victoria/file-assistant/releases/download/v0.1.0-rc1/FileAssistant-0.1.0-rc1-windows-x64.zip",
+      "size": 78007052,
+      "sha256": "4b1a54a40ac037c7a3b9b3a008458e0098ccbee14677c9c9482d4539d66ce6ba",
+      "matches_local": true
+    },
+    {
+      "name": "SHA256SUMS",
+      "url": "https://github.com/HMS-Victoria/file-assistant/releases/download/v0.1.0-rc1/SHA256SUMS",
+      "size": 209,
+      "sha256": "6afa8d37ddf37c3508509b33500d09edb598dd05bd3da5a6cbc3d9cc1c83dc53",
+      "matches_local": true
+    }
+  ],
+  "status": "passed"
+}
