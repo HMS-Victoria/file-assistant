@@ -1,0 +1,38 @@
+{
+  "zip_checksums": {
+    "FileAssistant-0.1.0-rc1-windows-x64.zip": "741990e5bd8038e702614f59fa3e1ded2e075fbef0a1eb567b2497651ba9bdca",
+    "FileAssistant-0.1.0-rc1-source.zip": "8e5ffff25601bb0d29cd82c972fbc8822027322373204fa434ffe2dae3fa6c17"
+  },
+  "zip_members": 471,
+  "source_id": "13febc223eb9787912bdb82c4909a5ed3ca7994a74d109788ba8967cccce737b",
+  "frozen_exit_code": 0,
+  "frozen_result": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "frozen": true,
+    "executable": "D:\\desktop\\obj_ai\\文件处理助手\\build\\portable-verification-accepted\\中文 空格解压目录\\FileAssistant\\文件小助手.exe",
+    "checks": [
+      "no-key GUI local find in DOCX/XLSX/PDF and Excel sum",
+      "DOCX/XLSX preview, backup, new output, reopen and restore",
+      "all three original SHA-256 unchanged",
+      "real Windows DPAPI synthetic credential round trip and clear"
+    ],
+    "real_clean_machine": false,
+    "real_ai_account": false,
+    "qt_platform": "windows",
+    "original_sha256": {
+      "会议 通知.docx": "5f30279651cf540ed587545cf40dda7eccfa994e317a4a26d5d4d768497991e3",
+      "报销 表.xlsx": "47d2fd4e9e40a36b3b476056a0dfda581dcce0004df34eea009924ded3a67326",
+      "通知 PDF.pdf": "3862dfdcbbb8cdc3cdd02f2bb7d59d26130f2eab078ced7558900656f32d3d57"
+    },
+    "status": "passed"
+  },
+  "path_only_system32": true,
+  "python_environment_removed": true,
+  "zip_integrity_and_manifest": "passed",
+  "private_file_name_scan": "passed",
+  "limitations": [
+    "developer machine still has Python installed",
+    "not real user interaction",
+    "no live AI account"
+  ]
+}

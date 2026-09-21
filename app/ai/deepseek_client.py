@@ -12,7 +12,28 @@ from app.config.settings import DeepSeekSettings
 class AiServiceError(RuntimeError):
     """可安全呈现给用户的 AI 服务异常。"""
 
-    user_message = "AI 服务暂时无法使用，请稍后再试；如果一直无法使用，请联系孩子帮忙检查。"
+    user_message = "AI 服务暂时无法使用。请检查网络，并在‘设置’中核对密钥和模型、测试连接。"
+
+    def __init__(self, message: str, user_message: str | None = None):
+        super().__init__(message)
+        if user_message:
+            self.user_message = user_message
+
+
+def _service_error(error: Exception) -> AiServiceError:
+    message = None
+    if isinstance(error, httpx.HTTPStatusError):
+        message = {
+            401: "密钥无效。请打开‘设置’，重新粘贴 DeepSeek 密钥后测试连接。",
+            402: "AI 账户余额不足。请在 DeepSeek 开放平台检查余额后重试。",
+            403: "AI 服务拒绝访问。请检查账户权限和密钥是否已启用。",
+            400: "模型或请求无法使用。请在‘设置’中核对模型名称后重试。",
+            404: "没有找到此模型或服务。请在‘设置’中核对模型名称。",
+            429: "请求过于频繁，请稍等片刻再试。",
+        }.get(error.response.status_code)
+    elif isinstance(error, httpx.TimeoutException):
+        message = "连接超时。请检查网络后重试；本地查找和统计仍可使用。"
+    return AiServiceError("AI 服务返回了无法使用的结果。", message)
 
 
 class DeepSeekClient:
@@ -50,7 +71,7 @@ class DeepSeekClient:
                 raise ValueError("AI 响应内容为空。")
             return content
         except (httpx.HTTPError, KeyError, IndexError, TypeError, ValueError) as error:
-            raise AiServiceError("AI 服务返回了无法使用的结果。") from error
+            raise _service_error(error) from error
 
     def create_text_completion(self, system_prompt: str, user_prompt: str) -> str:
         """请求纯文本回答，供总结和问答使用。"""
@@ -74,4 +95,4 @@ class DeepSeekClient:
                 raise ValueError("AI 响应内容为空。")
             return content.strip()
         except (httpx.HTTPError, KeyError, IndexError, TypeError, ValueError) as error:
-            raise AiServiceError("AI 服务返回了无法使用的结果。") from error
+            raise _service_error(error) from error

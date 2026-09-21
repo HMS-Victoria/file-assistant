@@ -1,0 +1,115 @@
+228 INFO: PyInstaller: 6.22.3, contrib hooks: 2026.7
+228 INFO: Python: 3.12.13
+272 INFO: Platform: Windows-11-10.0.26200-SP0
+272 INFO: Python environment: D:\desktop\obj_ai\文件处理助手\.build-venv
+275 INFO: Removing temporary files and cleaning cache in C:\Users\Administrator\AppData\Local\pyinstaller
+528 INFO: Module search paths (PYTHONPATH):
+['D:\\desktop\\obj_ai\\文件处理助手',
+ 'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python312\\python312.zip',
+ 'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python312\\DLLs',
+ 'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python312\\Lib',
+ 'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python312',
+ 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv',
+ 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages',
+ 'D:\\desktop\\obj_ai\\文件处理助手']
+1335 INFO: Appending 'datas' from .spec
+1340 INFO: checking Analysis
+1340 INFO: Building Analysis because Analysis-00.toc is non existent
+1340 INFO: Looking for Python shared library...
+1340 INFO: Using Python shared library: C:\Users\Administrator\AppData\Local\Programs\Python\Python312\python312.dll
+1340 INFO: Running Analysis Analysis-00.toc
+1340 INFO: Target bytecode optimization level: 0
+1340 INFO: Initializing module dependency graph...
+1343 INFO: Initializing module graph hook caches...
+1367 INFO: Analyzing modules for base_library.zip ...
+4242 INFO: Processing standard module hook 'hook-encodings.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+5145 INFO: Processing standard module hook 'hook-math.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+5355 INFO: Processing standard module hook 'hook-heapq.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+6276 INFO: Processing standard module hook 'hook-pickle.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+7755 INFO: Caching module dependency graph...
+7799 INFO: Analyzing D:\desktop\obj_ai\文件处理助手\app\main.py
+7809 INFO: Processing standard module hook 'hook-PySide6.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+8407 INFO: Processing standard module hook 'hook-shiboken6.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+8588 INFO: Processing standard module hook 'hook-PySide6.QtNetwork.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+11099 INFO: Processing standard module hook 'hook-PySide6.QtCore.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+14385 INFO: Processing standard module hook 'hook-PySide6.QtWidgets.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+18200 INFO: Processing standard module hook 'hook-PySide6.QtGui.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+45259 INFO: Processing standard module hook 'hook-certifi.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+45497 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+45626 INFO: Processing standard module hook 'hook-xml.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+45878 INFO: Processing standard module hook 'hook-_ctypes.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+46361 INFO: Processing standard module hook 'hook-anyio.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+47465 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+47466 INFO: SetuptoolsInfo: initializing cached setuptools info...
+49652 INFO: Processing standard module hook 'hook-pygments.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+53384 INFO: Processing standard module hook 'hook-pydantic.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+55093 INFO: Processing standard module hook 'hook-platform.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+55698 INFO: Processing standard module hook 'hook-zoneinfo.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+55746 INFO: Processing standard module hook 'hook-sysconfig.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+56888 INFO: Processing standard module hook 'hook-openpyxl.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+57303 INFO: Processing standard module hook 'hook-lxml.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+58671 INFO: Processing standard module hook 'hook-lxml.etree.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+58930 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+64060 INFO: Processing standard module hook 'hook-docx.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+64862 INFO: Processing module hooks (post-graph stage)...
+64997 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+65227 INFO: Processing standard module hook 'hook-difflib.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+65527 INFO: Processing standard module hook 'hook-webbrowser.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+65906 INFO: Processing standard module hook 'hook-lxml.isoschematron.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+66215 INFO: Processing pre-safe-import-module hook 'hook-tomli.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+66216 INFO: Setuptools: 'tomli' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.tomli'!
+66250 INFO: Processing standard module hook 'hook-setuptools.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+66267 INFO: Processing pre-safe-import-module hook 'hook-distutils.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+66302 INFO: Processing pre-safe-import-module hook 'hook-jaraco.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+66303 INFO: Setuptools: 'jaraco' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco'!
+66318 INFO: Processing pre-safe-import-module hook 'hook-more_itertools.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+66319 INFO: Setuptools: 'more_itertools' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.more_itertools'!
+66465 INFO: Processing standard module hook 'hook-_osx_support.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+66726 INFO: Processing standard module hook 'hook-setuptools._vendor.jaraco.text.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+66728 INFO: Processing pre-safe-import-module hook 'hook-importlib_resources.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+66757 INFO: Processing pre-safe-import-module hook 'hook-backports.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+66758 INFO: Setuptools: 'backports' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.backports'!
+67708 INFO: Processing pre-safe-import-module hook 'hook-wheel.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+67708 INFO: Setuptools: 'wheel' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.wheel'!
+67850 WARNING: Hidden import "tzdata" not found!
+70275 INFO: Processing standard module hook 'hook-lxml.objectify.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+70287 INFO: Performing binary vs. data reclassification (156 entries)
+70347 INFO: Looking for ctypes DLLs
+70370 INFO: Analyzing run-time hooks ...
+70375 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+70379 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+70382 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+70384 INFO: Including run-time hook 'pyi_rth_setuptools.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+70386 INFO: Including run-time hook 'pyi_rth_pyside6.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+70388 INFO: Processing pre-find-module-path hook 'hook-_pyi_rth_utils.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
+70390 INFO: Processing standard module hook 'hook-_pyi_rth_utils.py' from 'D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PyInstaller\\hooks'
+70414 INFO: Creating base_library.zip...
+70442 INFO: Looking for dynamic libraries
+73285 INFO: Extra DLL search directories (AddDllDirectory): ['D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\shiboken6']
+73285 INFO: Extra DLL search directories (PATH): ['D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Lib\\site-packages\\PySide6']
+75209 INFO: Warnings written to D:\desktop\obj_ai\文件处理助手\release\0.1.0-rc1-20260920T124753Z\work\file-assistant\warn-file-assistant.txt
+75339 INFO: Graph cross-reference written to D:\desktop\obj_ai\文件处理助手\release\0.1.0-rc1-20260920T124753Z\work\file-assistant\xref-file-assistant.html
+75395 INFO: checking PYZ
+75396 INFO: Building PYZ because PYZ-00.toc is non existent
+75396 INFO: Building PYZ (ZlibArchive) D:\desktop\obj_ai\文件处理助手\release\0.1.0-rc1-20260920T124753Z\work\file-assistant\PYZ-00.pyz
+76515 INFO: Building PYZ (ZlibArchive) D:\desktop\obj_ai\文件处理助手\release\0.1.0-rc1-20260920T124753Z\work\file-assistant\PYZ-00.pyz completed successfully.
+76548 INFO: checking PKG
+76548 INFO: Building PKG because PKG-00.toc is non existent
+76548 INFO: Building PKG (CArchive) 文件小助手.pkg
+76586 INFO: Building PKG (CArchive) 文件小助手.pkg completed successfully.
+76587 INFO: Bootloader D:\desktop\obj_ai\文件处理助手\.build-venv\Lib\site-packages\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+76588 INFO: checking EXE
+76588 INFO: Building EXE because EXE-00.toc is non existent
+76588 INFO: Building EXE from EXE-00.toc
+76588 INFO: Copying bootloader EXE to D:\desktop\obj_ai\文件处理助手\release\0.1.0-rc1-20260920T124753Z\work\file-assistant\文件小助手.exe
+76602 INFO: Copying icon to EXE
+76610 INFO: Copying 0 resources to EXE
+76611 INFO: Embedding manifest in EXE
+76619 INFO: Appending PKG archive to EXE
+76628 INFO: Fixing EXE headers
+76711 INFO: Building EXE from EXE-00.toc completed successfully.
+76715 INFO: checking COLLECT
+76716 INFO: Building COLLECT because COLLECT-00.toc is non existent
+76716 INFO: Building COLLECT COLLECT-00.toc
+77375 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+77385 INFO: Build complete! The results are available in: D:\desktop\obj_ai\文件处理助手\release\0.1.0-rc1-20260920T124753Z\stage

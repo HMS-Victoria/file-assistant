@@ -1,0 +1,5 @@
+Baseline: 41 passed in 25.08s (.venv). Pytest exit cleanup also reported an existing shared temp directory permission error; no application test failed.
+Final source regression: 55 passed in 2.78s (.build-venv, QT_QPA_PLATFORM=offscreen, unique explicit basetemp build/pytest-release-03).
+Command: .build-venv/Scripts/python.exe -m pytest -q --basetemp D:/desktop/obj_ai/文件处理助手/build/pytest-release-03
+Initial new-suite attempt: 32 passed, 23 setup errors because the explicit basetemp parent build/ did not yet exist. After creating a task-local build directory, all 55 tests passed. No user temp/cache cleanup was performed.
+Source Windows Qt self-test: passed; generated screenshots visually reviewed, Chinese text readable, controls no longer overlap.

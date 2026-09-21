@@ -11,6 +11,9 @@ from app.ui.main_window import MainWindow
 
 def main() -> int:
     """启动桌面应用。"""
+    if len(sys.argv) == 3 and sys.argv[1] == "--self-test":
+        from app.release_check import run
+        return run(sys.argv[2])
     application = QApplication(sys.argv)
     application.setApplicationName("文件小助手")
     window = MainWindow()

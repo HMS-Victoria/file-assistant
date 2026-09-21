@@ -1,0 +1,20 @@
+{
+  "platform": "Windows-11-10.0.26200-SP0",
+  "frozen": true,
+  "executable": "D:\\desktop\\obj_ai\\文件处理助手\\build\\portable-verification-accepted\\中文 空格解压目录\\FileAssistant\\文件小助手.exe",
+  "checks": [
+    "no-key GUI local find in DOCX/XLSX/PDF and Excel sum",
+    "DOCX/XLSX preview, backup, new output, reopen and restore",
+    "all three original SHA-256 unchanged",
+    "real Windows DPAPI synthetic credential round trip and clear"
+  ],
+  "real_clean_machine": false,
+  "real_ai_account": false,
+  "qt_platform": "windows",
+  "original_sha256": {
+    "会议 通知.docx": "5f30279651cf540ed587545cf40dda7eccfa994e317a4a26d5d4d768497991e3",
+    "报销 表.xlsx": "47d2fd4e9e40a36b3b476056a0dfda581dcce0004df34eea009924ded3a67326",
+    "通知 PDF.pdf": "3862dfdcbbb8cdc3cdd02f2bb7d59d26130f2eab078ced7558900656f32d3d57"
+  },
+  "status": "passed"
+}

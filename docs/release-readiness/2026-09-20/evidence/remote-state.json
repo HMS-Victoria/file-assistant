@@ -1,0 +1,9 @@
+{
+  "checked_date": "2026-09-20",
+  "method": "read-only GitHub public REST API via PowerShell",
+  "repository": "https://github.com/HMS-Victoria/file-assistant",
+  "main_sha": "cca9b6de8efebed3e158888fc8777b99c671a62b",
+  "releases": [],
+  "initial_worktree_status": "clean",
+  "remote_mutations": false
+}

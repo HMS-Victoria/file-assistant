@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "method": "real Windows ACL deny write on fresh synthetic directory",
+  "dialog": [
+    "暂时不能处理",
+    "无法写入文件所在目录。请关闭占用文件的程序，或将原文件复制到您有写入权限的文件夹后重试。原文件没有被修改。"
+  ],
+  "source_sha256_unchanged": "4f237b332155b7c71bbb7e1ec7cf1e31b728354021e3abd6ce224c01b1a78111",
+  "ai": "simulated validated plan; no network",
+  "interaction": "programmatic Qt handler; not human desktop interaction"
+}

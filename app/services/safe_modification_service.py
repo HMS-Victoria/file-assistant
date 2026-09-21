@@ -27,6 +27,10 @@ class SafetyError(RuntimeError):
     user_message = "为了保护原文件，这次没有生成新文件。请稍后再试。"
 
 
+class OutputAccessError(SafetyError):
+    user_message = "无法写入文件所在目录。请关闭占用文件的程序，或将原文件复制到您有写入权限的文件夹后重试。原文件没有被修改。"
+
+
 @dataclass(frozen=True)
 class ModificationPreview:
     """确认前展示给用户的完整修改说明。"""
@@ -103,12 +107,17 @@ class SafeModificationService:
         """仅在界面确认后调用；先备份，再生成、验证新文件。"""
         if preview.output_path.exists() or preview.source_path == preview.output_path:
             raise SafetyError("新文件名已被占用，请重新开始。")
-        backup = self._backups.create_backup(preview.source_path, preview.output_path)
+        try:
+            backup = self._backups.create_backup(preview.source_path, preview.output_path)
+        except OSError as error:
+            raise OutputAccessError("无法写入备份目录。") from error
         try:
             result = self._modifier.apply(preview.source_path, preview.output_path, plan)
             self._validate_output(preview.source_path, result)
         except Exception as error:
             preview.output_path.unlink(missing_ok=True)
+            if isinstance(error, OSError):
+                raise OutputAccessError("无法写入新文件。") from error
             if isinstance(error, SafetyError):
                 raise
             raise SafetyError("生成新文件时发生问题。") from error

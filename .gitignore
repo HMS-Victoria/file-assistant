@@ -20,4 +20,5 @@ __pycache__/
 # 打包产物（当前尚无安装包，预留）
 build/
 dist/
-*.spec
+.build-venv/
+release/

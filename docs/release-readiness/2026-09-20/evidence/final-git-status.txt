@@ -1,0 +1,18 @@
+ M .gitignore
+ M README.md
+ M app/ai/deepseek_client.py
+ M app/config/settings.py
+ M app/main.py
+ M app/services/safe_modification_service.py
+ M app/ui/main_window.py
+ M docs/safety.md
+ M requirements.txt
+ M tests/test_milestone_1.py
+?? app/release_check.py
+?? app/ui/settings_dialog.py
+?? docs/release-readiness/
+?? docs/便携版使用说明.md
+?? file-assistant.spec
+?? requirements-build.lock
+?? scripts/
+?? tests/test_release_readiness.py

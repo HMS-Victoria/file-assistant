@@ -1,0 +1,20 @@
+{
+  "platform": "Windows-11-10.0.26200-SP0",
+  "frozen": false,
+  "executable": "D:\\desktop\\obj_ai\\文件处理助手\\.build-venv\\Scripts\\python.exe",
+  "checks": [
+    "no-key GUI local find in DOCX/XLSX/PDF and Excel sum",
+    "DOCX/XLSX preview, backup, new output, reopen and restore",
+    "all three original SHA-256 unchanged",
+    "real Windows DPAPI synthetic credential round trip and clear"
+  ],
+  "real_clean_machine": false,
+  "real_ai_account": false,
+  "qt_platform": "windows",
+  "original_sha256": {
+    "会议 通知.docx": "2706b218197917c29a931df0ce4ca8dfffcacd42b48cb2b9a89feee5c233dfca",
+    "报销 表.xlsx": "8d6de2aadf1edac8d76effe880bd710478826a8a148b60881efb00ecce437c50",
+    "通知 PDF.pdf": "7a6c20d81aca6bd8622728396c5eae5da60f4f1bc77822102035faa5e616520e"
+  },
+  "status": "passed"
+}

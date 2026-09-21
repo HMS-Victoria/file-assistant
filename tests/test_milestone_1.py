@@ -65,4 +65,4 @@ def test_start_with_no_ai_configuration_shows_plain_language_error(tmp_path: Pat
     window.request_input.setText("帮我总结")
     window.handle_start()
 
-    assert shown == [("暂时不能处理", "AI 服务暂时无法使用，请联系孩子帮忙检查。")]
+    assert shown == [("暂时不能处理", AiConfigurationError.user_message)]

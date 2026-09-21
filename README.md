@@ -7,6 +7,8 @@
 
 一个面向 Windows 10/11 的 PySide6 桌面小工具：把 `.docx`、`.xlsx`、`.pdf` 拖进窗口，用一句日常中文说清想做什么，程序就会去办。
 
+**Windows 测试版 0.1.0-rc1**：[前往 GitHub Release 下载完整 ZIP](https://github.com/HMS-Victoria/file-assistant/releases/tag/v0.1.0-rc1)。完整解压后双击 `FileAssistant/文件小助手.exe`，保留 `_internal` 文件夹。已通过本地自动化与独立解压验证；无 Python 的新电脑及本人密钥实际验收仍待完成。见 [使用说明](docs/便携版使用说明.md) 和 [测试清单](docs/release-readiness/2026-09-20/NEW_PC_ACCEPTANCE.md)。
+
 **这个项目最核心的设计不是"AI 能做什么"，而是"AI 被严格限制成不能做什么"。**
 
 DeepSeek 只负责把自然语言翻译成一份 JSON **操作计划**；这份计划必须通过本地白名单与 Pydantic Schema 双重校验才能执行；执行层永远只生成**新文件**，原文件在代码层面就不可能被覆盖。
@@ -19,7 +21,7 @@ DeepSeek 只负责把自然语言翻译成一份 JSON **操作计划**；这份�
 - **先备份、再生成、后复验**。修改前把原文件 `copy2` 到应用内部 `.file_assistant_backups/`，并**逐字节比对**确认备份完整（不完整就删掉备份并报错）；新文件写完后重新打开读取一次，验证类型一致、非空、可正常解析。备份还能"恢复为另一个新文件"——恢复路径同样禁止覆盖任何已存在的文件。
 - **预览确认，删除类操作加倍提醒**。任何修改都先弹出中文逐条预览（"将"A"替换为"B""、"删除"账"这一列的第 3 列"），用户点"确认修改"才继续；`delete_text` / `delete_row` / `delete_column` 会被标记为危险操作，在确认框里额外追加一行"**注意：这项操作会删除内容。**"
 - **能本地算的绝不出网**。查找文字、Excel 求和 / 平均值 / 最大值 / 最小值 / 按条件筛选，全部由 `openpyxl` 在本机完成，**一次网络请求都不发**。只有"总结"和"问答"才调用 AI，且单次最多发送 12,000 字符的必要正文，`build_user_prompt()` 只携带文件类型与用户原话，**不含本机路径、不含文件名**。
-- **密钥不落日志、不进界面**。`DeepSeekSettings` 只从环境变量 / `.env` 读进内存；每个异常类都定义了**不含密钥**的 `user_message`（例如"AI 服务暂时无法使用，请联系孩子帮忙检查"），界面只显示这类中文提示，绝不回显密钥或原始堆栈。
+- **密钥加密保存**。设置窗口中的密钥输入为遮挡模式；`DeepSeekSettings` 使用 Windows 当前用户 DPAPI，加密后写入 `%LOCALAPPDATA%/FileAssistant/settings.json`。界面错误只展示中文操作提示，不回显密钥或原始堆栈；不再自动搜索 `.env`。
 - **有真测试、有真样例**。8 个 pytest 测试文件覆盖意图解析、查询服务、修改服务、安全修改服务、错误路径与处理器；`tests/sample_files/` 里有三份**真实可解析的中文样例文件**（`会议通知.docx`、`报销表.xlsx`、`报销通知.pdf`）。
 
 ## 技术栈
@@ -28,7 +30,7 @@ DeepSeek 只负责把自然语言翻译成一份 JSON **操作计划**；这份�
 - **界面**：PySide6（Qt6），单窗口 + 拖放区，微软雅黑，大字号大按钮（面向不熟悉电脑的使用者）
 - **数据校验**：pydantic v2（`TypeAdapter` + 判别联合 + `Literal` 白名单）
 - **AI 服务**：DeepSeek Chat Completions API（`response_format: json_object`，`temperature=0`），HTTP 客户端用 `httpx`
-- **配置**：`python-dotenv`
+- **配置**：固定用户目录 + Windows DPAPI（标准库调用）
 - **文件处理**：`python-docx`（Word 段落与表格）、`openpyxl`（Excel 工作表与单元格）、`PyMuPDF`（PDF 页数与文字）
 - **测试**：`pytest`
 
@@ -109,7 +111,7 @@ DeepSeek 只负责把自然语言翻译成一份 JSON **操作计划**；这份�
 | `app/ai/prompts.py` | 受限系统提示词与最小化用户提示（不带路径） |
 | `app/ai/deepseek_client.py` | DeepSeek 最小客户端，只请求 JSON 对象或纯文本，异常统一转成安全错误 |
 | `app/ai/intent_parser.py` | 自然语言 → 已验证 `OperationPlan`；不接触文件 |
-| `app/config/settings.py` | 从环境变量 / `.env` 读取配置，密钥只存内存 |
+| `app/config/settings.py` | 固定当前用户配置目录，Windows DPAPI 加密保存密钥 |
 | `app/processors/factory.py` | 按后缀分派处理器 |
 | `app/processors/base_processor.py` | 统一的读取结果数据结构 |
 | `app/services/query_service.py` | 只读查询：本机查找与统计零网络，总结/问答走 AI 且限 12,000 字符 |
@@ -178,26 +180,10 @@ python -m venv .venv
 
 ### 2. 配置 AI 服务（可选）
 
-只做"查找文字"和"Excel 统计/筛选"**不需要配置**，这些功能完全在本机运行。
-需要"总结"或"问答"时：
-
-```powershell
-Copy-Item .env.example .env
-# 编辑 .env，填入你自己的 DeepSeek 密钥
-```
-
-`.env` 内容（**密钥留空即为模板状态**）：
-
-```dotenv
-# 仅供开发测试使用；请复制为 .env 后填入自己的密钥。不要提交 .env。
-DEEPSEEK_API_KEY=
-# 可选，默认使用 deepseek-chat
-DEEPSEEK_MODEL=deepseek-chat
-```
-
-可选的第三个变量 `DEEPSEEK_BASE_URL` 默认 `https://api.deepseek.com`，用于指向兼容的自建端点。
-
-`.env` 已被 Git 忽略，且界面、错误提示与日志**都不会显示密钥**。
+选择窗口内明确标为“无需联网”的查找、Excel 统计或筛选功能时**不需要配置**。
+需要自然语言理解、总结、问答或 AI 修改计划时，打开“设置”，填入自己的 DeepSeek 密钥与模型，测试连接后保存。
+配置固定保存在 `%LOCALAPPDATA%/FileAssistant/settings.json`，密钥为 Windows 当前用户 DPAPI 密文。
+旧 `.env` 保留在本机但不再读取；升级后请在设置中重新填写。桌面版使用官方 DeepSeek 服务地址。
 
 ### 3. 启动
 
@@ -208,11 +194,10 @@ DEEPSEEK_MODEL=deepseek-chat
 ### 4. 使用
 
 1. 把 `.docx` / `.xlsx` / `.pdf` 拖进窗口。
-2. 在输入框里用日常中文写下要求，例如：
-   - `帮我在这个文件里找"报销"`（本机完成）
-   - `这张表的金额总和是多少`（本机完成）
-   - `帮我总结一下这份文件`（调用 AI）
-   - `把"张三"替换成"李四"`（会先弹出预览让我确认）
+2. 选择处理方式：
+   - 本地查找：输入 `报销`，全程无需联网。
+   - Excel 求和：填写列名 `金额`，全程无需联网。
+   - AI 帮我处理：输入 `帮我总结一下这份文件` 或 `把张三替换成李四`；自然语言理解需要联网，修改会先预览确认。
 3. 点"开始处理"。若是修改类操作，会先显示具体变更清单，确认后才生成 `原名_AI修改.docx`。
 
 ### 5. 运行测试
@@ -225,6 +210,19 @@ DEEPSEEK_MODEL=deepseek-chat
 
 界面截图请放在 [`docs/images/`](docs/images/)，该目录下的 README 列出了建议补充的截图清单。
 
+### 构建 Windows x64 便携包
+
+在 Windows x64 / Python 3.12 下执行唯一构建入口：
+
+```powershell
+python scripts/build_portable.py
+```
+
+脚本使用仓库内独立的 `.build-venv`，按 `requirements-build.lock` 安装固定版本，不改全局 PATH。
+输出到 `release/0.1.0-rc1-时间戳/`：完整 onedir ZIP、对应源码 ZIP、SHA256SUMS、逐文件源码哈希及构建记录。
+完整 ZIP 包含 Python、Qt 平台插件和文档处理运行库。构建记录不默认打入用户包。
+开发者可运行 `文件小助手.exe --self-test <全新目录>`，在指定目录生成合成文档、独立用户配置和结果记录；此命令不能代替新电脑人工验收。
+
 ## 已知限制
 
 诚实列出当前的真实边界（项目自述完成到 Milestone 6，以下是尚未覆盖的部分）：
@@ -234,7 +232,7 @@ DEEPSEEK_MODEL=deepseek-chat
 - **段落级格式会被重置**。`_replace_in_paragraphs()` 用的是 `paragraph.text = paragraph.text.replace(...)` 整体赋值，Python-docx 在这种赋值下会把该段落**压平成单一 run**，段落内的加粗、字号、颜色、局部字体等 run 级格式会丢失。修改后的文件内容是对的，但排版可能需要手工恢复。
 - **备份名是固定的，同一文件不能反复改两次同名输出**。备份文件名由 `{输出文件名}_原文件备份{后缀}` 决定，若该备份已存在会直接抛 `SafetyError`。想再改一次需要先手工整理 `.file_assistant_backups/`。
 - **Excel 列名自动识别有前提**。不带列名时，只有"恰好一列是数值列"才能自动定位；有多个数值列时会提示用户明确指定列名，而不是猜。
-- **没有安装包**。项目目前只支持"源码 + venv"运行，没有 PyInstaller 配置、没有 `.exe`，非技术用户无法独立安装。这是当前最大的可用性缺口。
+- **便携包尚待新电脑验收**。现有 PyInstaller onedir 构建入口与完整 ZIP 候选；没有安装向导或代码签名，尚不能称为已完成全部“下载即用”验收。
 - **依赖云端 AI**。总结与问答需要联网调用 DeepSeek，没有离线模型方案；网络不可用时这两个功能整体失败（会给出中文提示，不会崩溃）。
 - **扫描版 PDF 读不到文字**。`PyMuPDF` 提取的是 PDF 内嵌文本层，**没有 OCR**，图片型 PDF 会返回空内容并提示"这个文件里没有可读取的文字"。
 - **12,000 字符是硬截断**。`MAX_AI_CONTENT_CHARS = 12_000` 处直接切片，超长文档的总结只覆盖前 12,000 字符，后半部分会被静默丢弃。
@@ -246,7 +244,7 @@ DEEPSEEK_MODEL=deepseek-chat
 
 ### 设计出发点
 
-这个工具的目标用户是**不熟悉电脑的长辈**。代码里多处错误提示直接写着"请联系孩子帮忙检查"，这个语气透露了真实的使用场景：家人之间隔着一台电脑的距离处理文档。
+这个工具的目标用户是**不熟悉电脑的长辈**。设置和错误提示使用中文，并给出可自行操作的下一步。
 
 因此本项目的取舍非常明确：**宁可功能少，也不能让 AI 有破坏用户文件的机会**。它能做的事被压缩到 13 个可枚举的动作，而每一个动作的参数区间都被 Schema 钉死。
 
@@ -255,7 +253,7 @@ DEEPSEEK_MODEL=deepseek-chat
 1. **本地优先**。查找文字、Excel 统计与筛选 100% 在本机由 `openpyxl` / `python-docx` 完成，不产生任何网络请求。
 2. **不泄露路径**。发给 AI 的提示词只包含"文件类型（word/excel/pdf）+ 用户原话"，**不含本机路径、不含文件名**（见 `build_user_prompt()`）。
 3. **最小化外发内容**。需要 AI 时只发送完成任务所必需的正文，上限 12,000 字符。
-4. **密钥只存内存**。`DeepSeekSettings` 从环境变量 / `.env` 读取后仅保存在内存中；所有异常类都提供不含密钥的 `user_message`，界面不显示原始异常。
+4. **密钥加密保存**。`DeepSeekSettings` 将密钥用 Windows DPAPI 加密后保存在固定当前用户目录；界面使用遮挡输入及不含密钥的错误提示。
 5. **本仓库不含密钥**。`.env` 已被 `.gitignore` 排除，仓库中只有密钥留空的 `.env.example`。
 6. **原文件不离开本机、不被覆盖**。所有修改都是"读原文件 → 在内存中改 → 写入新文件"，原文件与内部备份都留在用户自己的磁盘上。
 
@@ -269,7 +267,6 @@ DEEPSEEK_MODEL=deepseek-chat
 | PyMuPDF | 读取 PDF | AGPLv3 / 商业双许可 |
 | pydantic | 操作计划 Schema 校验 | MIT |
 | httpx | HTTP 客户端 | BSD-3-Clause |
-| python-dotenv | 读取 `.env` | BSD-3-Clause |
 | DeepSeek API | 自然语言 → 操作计划、总结与问答 | 商业服务，遵循其服务条款 |
 | pytest | 测试 | MIT |
 
